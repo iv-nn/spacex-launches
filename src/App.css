@@ -1,0 +1,24 @@
+.app {
+    padding: 1rem;
+}
+
+header {
+    text-align: center;
+}
+
+.next-launch-patch {
+    width: 8rem;
+}
+
+.past-launches {
+    width: 64rem;
+}
+
+.past-launch-patch {
+    width: 4rem;
+}
+
+.loading {
+    width: 100%;
+    text-align: center;
+}
