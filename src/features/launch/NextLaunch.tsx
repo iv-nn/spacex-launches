@@ -13,6 +13,20 @@ export function NextLaunch () {
         error
     } = useGetNextLaunchQuery()
 
+    const formatDate = (date: string) => {
+        const parsedDate = new Date(date)
+        const options: Intl.DateTimeFormatOptions = {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric'
+        }
+        return new Intl.DateTimeFormat('default', options).format(parsedDate)
+    }
+
     let content
 
     if (isLoading) {
@@ -22,14 +36,15 @@ export function NextLaunch () {
     } else if(isSuccess && data) {
         content =
             <Stack direction="horizontal" gap={4}>
-                <img src={data.links.mission_patch_small} className="next-launch-patch" />
+                <img src={data.links.mission_patch_small} className="next-launch-patch" alt="patch" />
                 <div>
                     <h3>{data.mission_name}</h3>
-                    <span>{data.launch_date_utc}</span>
+                    <span>{formatDate(data.launch_date_utc)}</span>
                     <p>{data.details}</p>
                 </div>
             </Stack>
     }
+
     return (
         <Card>
             <Card.Body>

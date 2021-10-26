@@ -1,6 +1,7 @@
 import ListGroup from 'react-bootstrap/ListGroup'
 import Spinner from 'react-bootstrap/Spinner'
 import Stack from 'react-bootstrap/Stack'
+import ReactTimeAgo from 'react-time-ago'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../app/store'
 import { useGetPastLaunchesQuery } from '../../services/spacex'
@@ -17,6 +18,10 @@ export function PastLaunches() {
         error
     } = useGetPastLaunchesQuery()
 
+    const parseDate = (date: string) => {
+        return new Date(date)
+    }
+
     let content
 
     if (isLoading) {
@@ -26,13 +31,13 @@ export function PastLaunches() {
     } else if (isSuccess && data) {
         const list = data.map((launch) =>
             <ListGroup.Item key={launch.flight_number}>
-                <Stack direction="horizontal" gap={2}>
-                    <img src={launch.links.mission_patch_small} className="past-launch-patch" />
+                <Stack direction="horizontal" gap={2} className="past-launch">
+                    <img src={launch.links.mission_patch_small} className="past-launch-patch" alt="patch" />
                     <div>
-                        <div>{launch.launch_date_utc}</div>
+                        <div><ReactTimeAgo date={parseDate(launch.launch_date_utc)} /></div>
                         <div>{launch.mission_name}</div>
                     </div>
-                    <a onClick={() => dispatch(setSelected(launch)) }>
+                    <a href="#" onClick={() => dispatch(setSelected(launch)) }>
                         YT
                     </a>
                 </Stack>
