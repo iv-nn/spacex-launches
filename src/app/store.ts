@@ -1,10 +1,14 @@
+import { spacexApi } from '../services/spacex';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import launchReducer from '../features/launch/launchSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    launch: launchReducer,
+    [spacexApi.reducerPath]: spacexApi.reducer
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(spacexApi.middleware)
 });
 
 export type AppDispatch = typeof store.dispatch;
