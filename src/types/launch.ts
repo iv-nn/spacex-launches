@@ -5,6 +5,6 @@ export interface Launch {
     details: string;
     links: {
         mission_patch_small: string;
-        video_link: string;
+        youtube_id: string;
     }
 }

@@ -2,21 +2,23 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Launch } from '../../types/launch'
 
 export interface LaunchState {
-    shown: Launch | null;
+    selected: Launch | null;
 }
 
 const initialState: LaunchState = {
-    shown: null
+    selected: null
 }
 
 export const launchSlice = createSlice({
     name: 'launch',
     initialState,
     reducers: {
-        setShown: (state, action: PayloadAction<Launch>) => {
-            state.shown = action.payload
+        setSelected: (state, action: PayloadAction<Launch | null>) => {
+            state.selected = action.payload
         }
     }
 })
+
+export const { setSelected } = launchSlice.actions
 
 export default launchSlice.reducer

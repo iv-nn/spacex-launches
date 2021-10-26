@@ -1,10 +1,14 @@
-import React from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Spinner from 'react-bootstrap/Spinner'
 import Stack from 'react-bootstrap/Stack'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../app/store'
 import { useGetPastLaunchesQuery } from '../../services/spacex'
+import { setSelected } from './launchSlice'
 
 export function PastLaunches() {
+    const dispatch: AppDispatch = useDispatch()
+
     const {
         data,
         isLoading,
@@ -28,7 +32,7 @@ export function PastLaunches() {
                         <div>{launch.launch_date_utc}</div>
                         <div>{launch.mission_name}</div>
                     </div>
-                    <a>
+                    <a onClick={() => dispatch(setSelected(launch)) }>
                         YT
                     </a>
                 </Stack>
