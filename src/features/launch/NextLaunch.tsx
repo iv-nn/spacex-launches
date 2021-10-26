@@ -34,7 +34,7 @@ export function NextLaunch () {
         <Card>
             <Card.Body>
                 <Card.Title><h2>Next Launch</h2></Card.Title>
-                <Card.Text>{content}</Card.Text>
+                <Card.Text as="div">{content}</Card.Text>
             </Card.Body>
         </Card>
     )
